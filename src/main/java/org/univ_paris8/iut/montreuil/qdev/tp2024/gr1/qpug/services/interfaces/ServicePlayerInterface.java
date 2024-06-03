@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface ServicePlayerInterface {
 
-    ProfileDTO createNewProfile(String name, String pseudo, int birthYear, String interests, LangEnum langChoice, List<PlayerStatDTO> playerStats) throws IllegalLangArgumentException, IllegalYearArgumentException, NonUniquePseudoException, NonEmptyListException;
+    ProfileDTO createNewProfile(String name, String pseudo, int birthYear, String interests, String langChoice, List<PlayerStatDTO> playerStats) throws IllegalLangArgumentException, IllegalYearArgumentException, NonUniquePseudoException, NonEmptyListException;
 
 
 }
