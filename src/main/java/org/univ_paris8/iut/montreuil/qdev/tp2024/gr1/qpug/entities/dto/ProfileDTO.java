@@ -2,16 +2,17 @@ package org.univ_paris8.iut.montreuil.qdev.tp2024.gr1.qpug.entities.dto;
 
 import java.util.List;
 import java.util.Objects;
+import org.univ_paris8.iut.montreuil.qdev.tp2024.gr1.qpug.entities.enums.LangEnum;
 
 public class ProfileDTO {
     private String name;
     private String pseudo;
     private int birthYear;
     private String interests;
-    private int languageChoice;
-    private List<Object> playerStats;
+    private LangEnum languageChoice;
+    private List<PlayerStatDTO> playerStats;
 
-    public ProfileDTO(String name, String pseudo, int birthYear, String interests, int languageChoice, List<Object> playerStats) {
+    public ProfileDTO(String name, String pseudo, int birthYear, String interests, LangEnum languageChoice, List<PlayerStatDTO> playerStats) {
         this.name = name;
         this.pseudo = pseudo;
         this.birthYear = birthYear;
@@ -52,19 +53,19 @@ public class ProfileDTO {
         this.interests = interests;
     }
 
-    public int getLanguageChoice() {
+    public LangEnum getLanguageChoice() {
         return languageChoice;
     }
 
-    public void setLanguageChoice(int languageChoice) {
+    public void setLanguageChoice(LangEnum languageChoice) {
         this.languageChoice = languageChoice;
     }
 
-    public List<Object> getPlayerStats() {
+    public List<PlayerStatDTO> getPlayerStats() {
         return playerStats;
     }
 
-    public void setPlayerStats(List<Object> playerStats) {
+    public void setPlayerStats(List<PlayerStatDTO> playerStats) {
         this.playerStats = playerStats;
     }
 
