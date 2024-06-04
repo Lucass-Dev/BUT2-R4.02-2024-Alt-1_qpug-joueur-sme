@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ServicePlayerInterfaceImpl implements ServicePlayerInterface {
-    private static final ServicePlayerInterfaceImpl instance = new ServicePlayerInterfaceImpl();
+    private static ServicePlayerInterfaceImpl instance;
 
     private List<ProfileDTO> listeProfiles;
 
@@ -52,7 +52,11 @@ public class ServicePlayerInterfaceImpl implements ServicePlayerInterface {
     }
 
     public static ServicePlayerInterfaceImpl getInstance() {
-        return instance;
+        if (instance == null){
+            return new ServicePlayerInterfaceImpl();
+        }else{
+            return instance;
+        }
     }
 
     public List<ProfileDTO> getListeProfiles() {
