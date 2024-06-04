@@ -52,7 +52,7 @@ public class ServicePlayerInterfaceImpl implements ServicePlayerInterface {
         if (interests.split(",").length  < 1 || interests.split(";").length < 1){
             throw new BadInterestsSeparatorException(interests);
         }
-        ProfileDTO p = new ProfileDTO(name, pseudo, birthYear, interests, LangEnum.valueOf(langChoice), playerStats)
+        ProfileDTO p = new ProfileDTO(name, pseudo, birthYear, interests, LangEnum.valueOf(langChoice), playerStats);
         this.listeProfiles.add(p);
         return p;
     }
