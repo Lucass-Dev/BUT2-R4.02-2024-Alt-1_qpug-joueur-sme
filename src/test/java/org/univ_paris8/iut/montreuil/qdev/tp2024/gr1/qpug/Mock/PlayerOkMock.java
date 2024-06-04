@@ -12,7 +12,7 @@ import org.univ_paris8.iut.montreuil.qdev.tp2024.gr1.qpug.utils.exceptions.NonUn
 import java.util.List;
 
 
-public class NamePlayerOkMock implements ServicePlayerInterface {
+public class PlayerOkMock implements ServicePlayerInterface {
 
   public ProfileDTO createNewProfile(String name, String pseudo, int birthYear, String interests, LangEnum langChoice, List<PlayerStatDTO> playerStats) throws IllegalLangArgumentException, IllegalYearArgumentException, NonUniquePseudoException, NonEmptyListException{
     return new ProfileDTO(name, pseudo, birthYear,  interests, langChoice, playerStats);
