@@ -19,7 +19,12 @@ public class ServicePlayerInterfaceImpl implements ServicePlayerInterface {
     }
 
     @Override
-    public ProfileDTO createNewProfile(String name, String pseudo, int birthYear, String interests, String langChoice, List<PlayerStatDTO> playerStats) throws IllegalLangArgumentException, IllegalYearArgumentException, NonUniquePseudoException, NonEmptyListException, EmptyInterestsException, BadInterestsSeparatorException {
+    public ProfileDTO createNewProfile(String name, String pseudo, int birthYear, String interests, String langChoice, List<PlayerStatDTO> playerStats) throws IllegalLangArgumentException, IllegalYearArgumentException, NonUniquePseudoException, NonEmptyListException, EmptyInterestsException, BadInterestsSeparatorException, EmptyPseudoException {
+
+        if (pseudo.isEmpty()){
+            throw new EmptyPseudoException();
+        }
+
         for (ProfileDTO p:
              getListeProfiles()) {
             if (pseudo.equals(p.getPseudo()))
