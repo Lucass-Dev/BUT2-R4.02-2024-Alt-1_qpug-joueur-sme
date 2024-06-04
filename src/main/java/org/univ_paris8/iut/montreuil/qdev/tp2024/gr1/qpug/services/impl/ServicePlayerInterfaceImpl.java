@@ -4,10 +4,7 @@ import org.univ_paris8.iut.montreuil.qdev.tp2024.gr1.qpug.entities.dto.PlayerSta
 import org.univ_paris8.iut.montreuil.qdev.tp2024.gr1.qpug.entities.dto.ProfileDTO;
 import org.univ_paris8.iut.montreuil.qdev.tp2024.gr1.qpug.entities.enums.LangEnum;
 import org.univ_paris8.iut.montreuil.qdev.tp2024.gr1.qpug.services.interfaces.ServicePlayerInterface;
-import org.univ_paris8.iut.montreuil.qdev.tp2024.gr1.qpug.utils.exceptions.IllegalLangArgumentException;
-import org.univ_paris8.iut.montreuil.qdev.tp2024.gr1.qpug.utils.exceptions.IllegalYearArgumentException;
-import org.univ_paris8.iut.montreuil.qdev.tp2024.gr1.qpug.utils.exceptions.NonEmptyListException;
-import org.univ_paris8.iut.montreuil.qdev.tp2024.gr1.qpug.utils.exceptions.NonUniquePseudoException;
+import org.univ_paris8.iut.montreuil.qdev.tp2024.gr1.qpug.utils.exceptions.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,25 +19,33 @@ public class ServicePlayerInterfaceImpl implements ServicePlayerInterface {
     }
 
     @Override
-    public ProfileDTO createNewProfile(String name, String pseudo, int birthYear, String interests, String langChoice, List<PlayerStatDTO> playerStats) throws IllegalLangArgumentException, IllegalYearArgumentException, NonUniquePseudoException, NonEmptyListException {
+    public ProfileDTO createNewProfile(String name, String pseudo, int birthYear, String interests, String langChoice, List<PlayerStatDTO> playerStats) throws IllegalLangArgumentException, IllegalYearArgumentException, NonUniquePseudoException, NonEmptyListException, EmptyInterestsException, BadInterestsSeparatorException {
         for (ProfileDTO p:
              getListeProfiles()) {
             if (pseudo.equals(p.getPseudo()))
-                throw new NonUniquePseudoException();
+                throw new NonUniquePseudoException(pseudo);
         }
 
         try{
             LangEnum.valueOf(langChoice);
         }catch (IllegalArgumentException e){
-            throw new IllegalLangArgumentException();
+            throw new IllegalLangArgumentException(langChoice);
         }
 
         if (!playerStats.isEmpty()){
-            throw new NonEmptyListException();
+            throw new NonEmptyListException(playerStats);
         }
 
         if (birthYear < 1924 || birthYear > 2019){
-            throw new IllegalYearArgumentException();
+            throw new IllegalYearArgumentException(birthYear);
+        }
+
+        if (interests.isEmpty()){
+            throw new EmptyInterestsException();
+        }
+
+        if (interests.split(",").length  < 1 || interests.split(";").length < 1){
+            throw new BadInterestsSeparatorException(interests);
         }
 
         return new ProfileDTO(name, pseudo, birthYear, interests, LangEnum.valueOf(langChoice), playerStats);
