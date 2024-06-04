@@ -4,6 +4,7 @@ import org.univ_paris8.iut.montreuil.qdev.tp2024.gr1.qpug.entities.enums.LangEnu
 
 import java.util.List;
 import java.util.Objects;
+import org.univ_paris8.iut.montreuil.qdev.tp2024.gr1.qpug.entities.enums.LangEnum;
 
 public class ProfileDTO {
     private String name;
@@ -13,12 +14,12 @@ public class ProfileDTO {
     private LangEnum languageChoice;
     private List<PlayerStatDTO> playerStats;
 
-    public ProfileDTO(String name, String pseudo, int birthYear, String interests, LangEnum languageChoice, List<PlayerStatDTO> playerStats) {
+    public ProfileDTO(String name, String pseudo, int birthYear, String interests, String languageChoice, List<PlayerStatDTO> playerStats) {
         this.name = name;
         this.pseudo = pseudo;
         this.birthYear = birthYear;
         this.interests = interests;
-        this.languageChoice = languageChoice;
+        this.languageChoice = LangEnum.valueOf(languageChoice);
         this.playerStats = playerStats;
     }
 

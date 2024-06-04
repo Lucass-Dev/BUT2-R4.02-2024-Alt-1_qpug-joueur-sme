@@ -19,7 +19,11 @@ public class ServicePlayerInterfaceImpl implements ServicePlayerInterface {
     }
 
     @Override
-    public ProfileDTO createNewProfile(String name, String pseudo, int birthYear, String interests, String langChoice, List<PlayerStatDTO> playerStats) throws IllegalLangArgumentException, IllegalYearArgumentException, NonUniquePseudoException, NonEmptyListException, EmptyInterestsException, BadInterestsSeparatorException, EmptyPseudoException {
+    public ProfileDTO createNewProfile(String name, String pseudo, int birthYear, String interests, String langChoice, List<PlayerStatDTO> playerStats) throws IllegalLangArgumentException, IllegalYearArgumentException, NonUniquePseudoException, NonEmptyListException, EmptyInterestsException, BadInterestsSeparatorException, EmptyPseudoException, EmptyNameException {
+
+        if (name.isEmpty()){
+            throw new EmptyNameException();
+        }
 
         if (pseudo.isEmpty()){
             throw new EmptyPseudoException();
@@ -52,7 +56,7 @@ public class ServicePlayerInterfaceImpl implements ServicePlayerInterface {
         if (interests.split(",").length  < 1 || interests.split(";").length < 1){
             throw new BadInterestsSeparatorException(interests);
         }
-        ProfileDTO p = new ProfileDTO(name, pseudo, birthYear, interests, LangEnum.valueOf(langChoice), playerStats);
+        ProfileDTO p = new ProfileDTO(name, pseudo, birthYear, interests, langChoice, playerStats);
         this.listeProfiles.add(p);
         return p;
     }
